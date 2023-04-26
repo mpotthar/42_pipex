@@ -50,3 +50,10 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# custom
+.idea/
+.vscode/
+.DS_Store
+pipex
+pipex.dSYM
