@@ -16,7 +16,7 @@ char **free_dbl_ptr(char **ptr)
 }
 
 // get all paths from envp and split by ':'
-char **all_paths(char **envp)
+char **get_env_paths(char **envp)
 {
 	int		i;
 	char	**path;
@@ -42,41 +42,38 @@ char **split_cmd(char *cmd)
 }
 
 // get path of cmd
-char *path_cmd(char **envp, char *cmd)
+int path_cmd(t_data *pipex, char *cmd)
 {
-	char	**paths;
-	char	**cmd_split;
 	char 	*path_tmp;
-	char	*path_cmd;
 	int		i;
 
 	i = 0;
-	paths = all_paths(envp);
-	cmd_split = split_cmd(cmd);
-	while (paths[i])
+	pipex->env_paths = get_env_paths(pipex->envp);
+	pipex->cmd_split = split_cmd(cmd);
+	while (pipex->env_paths[i])
 	{
-		path_tmp = ft_strjoin(paths[i], "/");
+		path_tmp = ft_strjoin(pipex->env_paths[i], "/");
 		if (!path_tmp)
-			return (NULL);
-		path_cmd = ft_strjoin(path_tmp, cmd_split[0]);
-		if (!path_cmd)
+			return (0);
+		pipex->cmd_path = ft_strjoin(path_tmp, pipex->cmd_split[0]);
+		if (!(pipex->cmd_path))
 		{
 			free(path_tmp);
-			return (NULL);
+			return (0);
 		}
 		free(path_tmp);
-		if (access(path_cmd, F_OK) == 0)
-		{
-			ft_printf(GREEN"found path\n"ESC);
-			break ;
-		}
+		if (access(pipex->cmd_path, X_OK) == 0)
+			return (1);
 		else
-			free(path_cmd);
+		{
+			free(pipex->cmd_path);
+			pipex->cmd_path = NULL;
+		}
 		i++;
 	}
-	free_dbl_ptr(cmd_split);
-	free_dbl_ptr(paths);
-	return (path_cmd);
+	free_dbl_ptr(pipex->cmd_split);
+	free_dbl_ptr(pipex->env_paths);
+	return (3);
 }
 
 
@@ -86,10 +83,23 @@ char *path_cmd(char **envp, char *cmd)
 // ******** MAIN ********
 int	main(int argc, char **argv, char **envp)
 {
+	t_data *pipex;
+
+	pipex = (t_data*)malloc(sizeof(t_data));
+	if (!pipex)
+		return (1);
+	ft_bzero(pipex, sizeof(t_data));
+	pipex->argc = argc;
+	pipex->argv = argv;
+	pipex->envp = envp;
+	
 	// if (argc != 5)
 	// 	return (1);
-	char *path = path_cmd(envp, argv[1]);
-	ft_printf(RED"PATH: %s\n"ESC, path);
-	free(path);
+	int result = path_cmd(pipex, argv[1]);
+	ft_printf(RED"RESULT:	%i\nPATH:	%s\n"ESC, result, pipex->cmd_path);
+	ft_printf("Addr: %p\n", pipex->cmd_path);
+	if (pipex->cmd_path)
+		free(pipex->cmd_path);
+	free(pipex);
 }
 
