@@ -97,7 +97,6 @@ int	main(int argc, char **argv, char **envp)
 	// 	return (1);
 	int result = path_cmd(pipex, argv[1]);
 	ft_printf(RED"RESULT:	%i\nPATH:	%s\n"ESC, result, pipex->cmd_path);
-	ft_printf("Addr: %p\n", pipex->cmd_path);
 	if (pipex->cmd_path)
 		free(pipex->cmd_path);
 	free(pipex);
