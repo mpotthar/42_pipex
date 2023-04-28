@@ -1,5 +1,6 @@
 #ifndef PIPEX_H
 # define PIPEX_H
+
 # include "../libft/libft.h"
 
 # include <fcntl.h>
@@ -24,6 +25,12 @@ typedef struct s_data
 	char	**env_paths;
 	char	**cmd_split;
 	char	*cmd_path;
+
+	pid_t	pid1;
+	pid_t	pid2;
+	int		tube[2];
+	int		fd_in;
+	int		fd_out;
 }	t_data;
 
 #endif

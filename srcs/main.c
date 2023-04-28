@@ -71,7 +71,6 @@ int path_cmd(t_data *pipex, char *cmd)
 		}
 		i++;
 	}
-	free_dbl_ptr(pipex->cmd_split);
 	free_dbl_ptr(pipex->env_paths);
 	return (3);
 }
@@ -88,7 +87,6 @@ int	main(int argc, char **argv, char **envp)
 	pipex = (t_data*)malloc(sizeof(t_data));
 	if (!pipex)
 		return (1);
-	ft_bzero(pipex, sizeof(t_data));
 	pipex->argc = argc;
 	pipex->argv = argv;
 	pipex->envp = envp;
@@ -97,8 +95,15 @@ int	main(int argc, char **argv, char **envp)
 	// 	return (1);
 	int result = path_cmd(pipex, argv[1]);
 	ft_printf(RED"RESULT:	%i\nPATH:	%s\n"ESC, result, pipex->cmd_path);
+	
+	
+	execve(pipex->cmd_path, pipex->cmd_split, pipex->envp);
+	
+	
 	if (pipex->cmd_path)
 		free(pipex->cmd_path);
+	if (pipex->cmd_split)
+		free_dbl_ptr(pipex->cmd_split);
 	free(pipex);
 }
 
