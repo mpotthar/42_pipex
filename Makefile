@@ -4,7 +4,8 @@ LIBFT			= libft
 
 SRCDIR			= srcs
 
-SRCS			= ${addprefix ${SRCDIR}/, main.c}
+SRCS			= ${addprefix ${SRCDIR}/, main.c \
+					error.c}
 
 OBJS			= ${SRCS:.c=.o}
 

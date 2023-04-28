@@ -17,6 +17,9 @@
 # define BLUE "\033[0;34m"
 # define ESC "\033[0m"
 
+// error
+# define ERR_ARGC "Error: wrong number of arguments\n"
+
 typedef struct s_data 
 {
 	int		argc;
@@ -32,5 +35,13 @@ typedef struct s_data
 	int		fd_in;
 	int		fd_out;
 }	t_data;
+
+// functions
+
+// main.c
+
+// error.c
+int		msg_stderr(char *err);
+void	msg_error(char *err);
 
 #endif

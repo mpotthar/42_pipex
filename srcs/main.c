@@ -91,8 +91,8 @@ int	main(int argc, char **argv, char **envp)
 	pipex->argv = argv;
 	pipex->envp = envp;
 	
-	// if (argc != 5)
-	// 	return (1);
+	if (argc != 5)
+		return (msg_stderr(ERR_ARGC));
 	int result = path_cmd(pipex, argv[1]);
 	ft_printf(RED"RESULT:	%i\nPATH:	%s\n"ESC, result, pipex->cmd_path);
 	
