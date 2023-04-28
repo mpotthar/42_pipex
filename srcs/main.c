@@ -84,16 +84,22 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_data *pipex;
 
+	if (argc != 5)
+		return (msg_stderr(ERR_ARGC));
 	pipex = (t_data*)malloc(sizeof(t_data));
 	if (!pipex)
 		return (1);
 	pipex->argc = argc;
 	pipex->argv = argv;
 	pipex->envp = envp;
-	
-	if (argc != 5)
-		return (msg_stderr(ERR_ARGC));
-	int result = path_cmd(pipex, argv[1]);
+	pipex->fd_in = open(argv[1], O_RDONLY);
+	if (pipex->fd_in < 0)
+		msg_error(ERR_InFile);
+	pipex->fd_out = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (pipex->fd_out < 0)
+		msg_error(ERR_OutFile);
+
+	int result = path_cmd(pipex, argv[2]);
 	ft_printf(RED"RESULT:	%i\nPATH:	%s\n"ESC, result, pipex->cmd_path);
 	
 	

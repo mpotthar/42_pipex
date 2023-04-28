@@ -19,6 +19,8 @@
 
 // error
 # define ERR_ARGC "Error: wrong number of arguments\n"
+# define ERR_InFile "Error: can't open input file"
+# define ERR_OutFile "Error: can't open or create output file"
 
 typedef struct s_data 
 {
