@@ -41,43 +41,94 @@ char **split_cmd(char *cmd)
 	return (cmd_split);
 }
 
-// get path of cmd
-int path_cmd(t_data *pipex, char *cmd)
+// // get path of cmd
+// int path_cmd(t_data *pipex, char *cmd)
+// {
+// 	char 	*path_tmp;
+// 	int		i;
+
+// 	i = 0;
+// 	pipex->env_paths = get_env_paths(pipex->envp);
+// 	pipex->cmd_split = split_cmd(cmd);
+// 	while (pipex->env_paths[i])
+// 	{
+// 		path_tmp = ft_strjoin(pipex->env_paths[i], "/");
+// 		if (!path_tmp)
+// 			return (0);
+// 		pipex->cmd_path = ft_strjoin(path_tmp, pipex->cmd_split[0]);
+// 		if (!(pipex->cmd_path))
+// 		{
+// 			free(path_tmp);
+// 			return (0);
+// 		}
+// 		free(path_tmp);
+// 		if (access(pipex->cmd_path, X_OK) == 0)
+// 			return (1);
+// 		else
+// 		{
+// 			free(pipex->cmd_path);
+// 			pipex->cmd_path = NULL;
+// 		}
+// 		i++;
+// 	}
+// 	free_dbl_ptr(pipex->env_paths);
+// 	return (3);
+// }
+
+// get command path
+char *get_cmd_path(char *cmd, char **envp)
 {
-	char 	*path_tmp;
+	char	*path_tmp;
+	char	**env_paths;
+	char	**cmd_split;
+	char	*cmd_path;
 	int		i;
 
 	i = 0;
-	pipex->env_paths = get_env_paths(pipex->envp);
-	pipex->cmd_split = split_cmd(cmd);
-	while (pipex->env_paths[i])
+	env_paths = get_env_paths(envp);
+	cmd_split = split_cmd(cmd);
+	while (env_paths[i])
 	{
-		path_tmp = ft_strjoin(pipex->env_paths[i], "/");
+		path_tmp = ft_strjoin(env_paths[i], "/");
 		if (!path_tmp)
-			return (0);
-		pipex->cmd_path = ft_strjoin(path_tmp, pipex->cmd_split[0]);
-		if (!(pipex->cmd_path))
+			return (NULL);
+		cmd_path = ft_strjoin(path_tmp, cmd_split[0]);
+		if (!cmd_path)
 		{
 			free(path_tmp);
-			return (0);
+			return (NULL);
 		}
 		free(path_tmp);
-		if (access(pipex->cmd_path, X_OK) == 0)
-			return (1);
+		if (access(cmd_path, X_OK) == 0)
+			return (cmd_path);
 		else
 		{
-			free(pipex->cmd_path);
-			pipex->cmd_path = NULL;
+			free(cmd_path);
+			cmd_path = NULL;
 		}
 		i++;
 	}
-	free_dbl_ptr(pipex->env_paths);
-	return (3);
+	free_dbl_ptr(env_paths);
+	return (NULL);
+}
+
+// ******** EXECUTER ********
+void	executer(char *command, char **envp)
+{
+	char	*cmd_path;
+	char	**cmd_split;
+
+	cmd_path = get_cmd_path(command, envp);
+	if (!cmd_path)
+		msg_error(ERR_CmdPath);
+	cmd_split = split_cmd(command);
+	execve(cmd_path, cmd_split, envp);
+	msg_error(ERR_Execve);
 }
 
 // ******** PROCESSES ********
 // child process
-void child(char *argv, int *p_fd, char **envp)
+void child(char **argv, int *p_fd, char **envp)
 {
 	int	fd;
 
@@ -87,11 +138,11 @@ void child(char *argv, int *p_fd, char **envp)
 	dup2(fd, STDIN_FILENO);
 	dup2(p_fd[1], STDOUT_FILENO);
 	close(p_fd[0]);
-	//run executer
+	executer(argv[2], envp);
 }
 
 //parent process
-void	parent(char *argv, int *p_fd, char **envp)
+void	parent(char **argv, int *p_fd, char **envp)
 {
 	int	fd;
 
@@ -101,7 +152,7 @@ void	parent(char *argv, int *p_fd, char **envp)
 	dup2(fd, STDOUT_FILENO);
 	dup2(p_fd[0], STDIN_FILENO);
 	close(p_fd[1]);
-	//run executer
+	executer(argv[3], envp);
 }
 
 
@@ -119,8 +170,8 @@ int	main(int argc, char **argv, char **envp)
 	if (pid == -1)
 		return (msg_stderr(ERR_Fork));
 	if (pid == 0)
-		//run child
-	//run parent
+		child(argv, p_fd, envp);
+	parent(argv, p_fd, envp);
 }
 
 

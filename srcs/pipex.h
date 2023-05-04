@@ -23,6 +23,8 @@
 # define ERR_OutFile "Error: can't open or create output file"
 # define ERR_Pipe "Error: pipe failed\n"
 # define ERR_Fork "Error: fork failed\n"
+# define ERR_CmdPath "Error: command not found\n"
+# define ERR_Execve "Error: execve failed\n"
 
 // typedef struct s_data 
 // {
