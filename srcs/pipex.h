@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:08:05 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/04 13:08:18 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/04 13:42:08 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int		msg_stderr(char *err);
 void	msg_error(char *err);
 
 // processes.c
-void	child(char **argv, int *p_fd, char **envp);
-void	parent(char **argv, int *p_fd, char **envp);
+void	child_1(char **argv, int *p_fd, char **envp);
+void	child_2(char **argv, int *p_fd, char **envp);
 
 // executer.c
 void	executer(char *command, char **envp);

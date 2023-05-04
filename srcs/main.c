@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:01:47 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/04 13:06:16 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/04 13:39:51 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,25 @@
 int	main(int argc, char **argv, char **envp)
 {
 	int		p_fd[2];
-	pid_t	pid;
+	pid_t	pid_1;
+	pid_t	pid_2;
 
 	if (argc != 5)
 		return (msg_stderr(ERR_ARGC));
 	if (pipe(p_fd) == -1)
 		return (msg_stderr(ERR_PIPE));
-	pid = fork();
-	if (pid == -1)
+	pid_1 = fork();
+	if (pid_1 == -1)
 		return (msg_stderr(ERR_FORK));
-	if (pid == 0)
-		child(argv, p_fd, envp);
-	parent(argv, p_fd, envp);
+	if (pid_1 == 0)
+		child_1(argv, p_fd, envp);
+	pid_2 = fork();
+	if (pid_2 == -1)
+		return (msg_stderr(ERR_FORK));
+	if (pid_2 == 0)
+		child_2(argv, p_fd, envp);
+	close(p_fd[0]);
+	close(p_fd[1]);
+	waitpid(pid_1, NULL, 0);
+	waitpid(pid_2, NULL, 0);
 }

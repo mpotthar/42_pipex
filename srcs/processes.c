@@ -6,15 +6,15 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:00:17 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/04 13:08:43 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/04 13:40:21 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
 // ******** PROCESSES ********
-// child process
-void	child(char **argv, int *p_fd, char **envp)
+// child 1 process
+void	child_1(char **argv, int *p_fd, char **envp)
 {
 	int	fd;
 
@@ -27,8 +27,8 @@ void	child(char **argv, int *p_fd, char **envp)
 	executer(argv[2], envp);
 }
 
-//parent process
-void	parent(char **argv, int *p_fd, char **envp)
+// child 2 process
+void	child_2(char **argv, int *p_fd, char **envp)
 {
 	int	fd;
 
