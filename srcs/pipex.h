@@ -21,22 +21,24 @@
 # define ERR_ARGC "Error: wrong number of arguments\n"
 # define ERR_InFile "Error: can't open input file"
 # define ERR_OutFile "Error: can't open or create output file"
+# define ERR_Pipe "Error: pipe failed\n"
+# define ERR_Fork "Error: fork failed\n"
 
-typedef struct s_data 
-{
-	int		argc;
-	char	**argv;
-	char	**envp;
-	char	**env_paths;
-	char	**cmd_split;
-	char	*cmd_path;
+// typedef struct s_data 
+// {
+// 	int		argc;
+// 	char	**argv;
+// 	char	**envp;
+// 	char	**env_paths;
+// 	char	**cmd_split;
+// 	char	*cmd_path;
 
-	pid_t	pid1;
-	pid_t	pid2;
-	int		tube[2];
-	int		fd_in;
-	int		fd_out;
-}	t_data;
+// 	pid_t	pid1;
+// 	pid_t	pid2;
+// 	int		tube[2];
+// 	int		fd_in;
+// 	int		fd_out;
+// }	t_data;
 
 // functions
 

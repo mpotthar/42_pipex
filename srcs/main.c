@@ -75,41 +75,87 @@ int path_cmd(t_data *pipex, char *cmd)
 	return (3);
 }
 
+// ******** PROCESSES ********
+// child process
+void child(char *argv, int *p_fd, char **envp)
+{
+	int	fd;
 
+	fd = open(argv[1], O_RDONLY, 0777);
+	if (fd < 0)
+		msg_error(ERR_InFile);
+	dup2(fd, STDIN_FILENO);
+	dup2(p_fd[1], STDOUT_FILENO);
+	close(p_fd[0]);
+	//run executer
+}
 
+//parent process
+void	parent(char *argv, int *p_fd, char **envp)
+{
+	int	fd;
+
+	fd = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (fd < 0)
+		msg_error(ERR_OutFile);
+	dup2(fd, STDOUT_FILENO);
+	dup2(p_fd[0], STDIN_FILENO);
+	close(p_fd[1]);
+	//run executer
+}
 
 
 // ******** MAIN ******** 
 int	main(int argc, char **argv, char **envp)
 {
-	t_data *pipex;
+	int		p_fd[2];
+	pid_t	pid;
 
 	if (argc != 5)
 		return (msg_stderr(ERR_ARGC));
-	pipex = (t_data*)malloc(sizeof(t_data));
-	if (!pipex)
-		return (1);
-	pipex->argc = argc;
-	pipex->argv = argv;
-	pipex->envp = envp;
-	pipex->fd_in = open(argv[1], O_RDONLY);
-	if (pipex->fd_in < 0)
-		msg_error(ERR_InFile);
-	pipex->fd_out = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (pipex->fd_out < 0)
-		msg_error(ERR_OutFile);
-
-	int result = path_cmd(pipex, argv[2]);
-	ft_printf(RED"RESULT:	%i\nPATH:	%s\n"ESC, result, pipex->cmd_path);
-	
-	
-	execve(pipex->cmd_path, pipex->cmd_split, pipex->envp);
-	
-	
-	if (pipex->cmd_path)
-		free(pipex->cmd_path);
-	if (pipex->cmd_split)
-		free_dbl_ptr(pipex->cmd_split);
-	free(pipex);
+	if (pipe(p_fd) == -1)
+		return (msg_stderr(ERR_Pipe));
+	pid = fork();
+	if (pid == -1)
+		return (msg_stderr(ERR_Fork));
+	if (pid == 0)
+		//run child
+	//run parent
 }
+
+
+
+
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	t_data *pipex;
+
+// 	if (argc != 5)
+// 		return (msg_stderr(ERR_ARGC));
+// 	pipex = (t_data*)malloc(sizeof(t_data));
+// 	if (!pipex)
+// 		return (1);
+// 	pipex->argc = argc;
+// 	pipex->argv = argv;
+// 	pipex->envp = envp;
+// 	pipex->fd_in = open(argv[1], O_RDONLY);
+// 	if (pipex->fd_in < 0)
+// 		msg_error(ERR_InFile);
+// 	pipex->fd_out = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+// 	if (pipex->fd_out < 0)
+// 		msg_error(ERR_OutFile);
+
+// 	int result = path_cmd(pipex, argv[2]);
+// 	ft_printf(RED"RESULT:	%i\nPATH:	%s\n"ESC, result, pipex->cmd_path);
+	
+	
+// 	execve(pipex->cmd_path, pipex->cmd_split, pipex->envp);
+	
+	
+// 	if (pipex->cmd_path)
+// 		free(pipex->cmd_path);
+// 	if (pipex->cmd_split)
+// 		free_dbl_ptr(pipex->cmd_split);
+// 	free(pipex);
+// }
 
