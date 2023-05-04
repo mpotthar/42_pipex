@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:00:17 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/04 13:03:02 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/04 13:08:43 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	child(char **argv, int *p_fd, char **envp)
 
 	fd = open(argv[1], O_RDONLY, 0777);
 	if (fd < 0)
-		msg_error(ERR_InFile);
+		msg_error(ERR_INFILE);
 	dup2(fd, STDIN_FILENO);
 	dup2(p_fd[1], STDOUT_FILENO);
 	close(p_fd[0]);
@@ -34,7 +34,7 @@ void	parent(char **argv, int *p_fd, char **envp)
 
 	fd = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (fd < 0)
-		msg_error(ERR_OutFile);
+		msg_error(ERR_OUTFILE);
 	dup2(fd, STDOUT_FILENO);
 	dup2(p_fd[0], STDIN_FILENO);
 	close(p_fd[1]);

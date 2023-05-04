@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/04 13:08:05 by mpotthar          #+#    #+#             */
+/*   Updated: 2023/05/04 13:08:18 by mpotthar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PIPEX_H
 # define PIPEX_H
 
@@ -19,16 +31,14 @@
 
 // error
 # define ERR_ARGC "Error: wrong number of arguments\n"
-# define ERR_InFile "Error: can't open input file"
-# define ERR_OutFile "Error: can't open or create output file"
-# define ERR_Pipe "Error: pipe failed\n"
-# define ERR_Fork "Error: fork failed\n"
-# define ERR_CmdPath "Error: command not found\n"
-# define ERR_Execve "Error: execve failed\n"
+# define ERR_INFILE "Error: can't open input file"
+# define ERR_OUTFILE "Error: can't open or create output file"
+# define ERR_PIPE "Error: pipe failed\n"
+# define ERR_FORK "Error: fork failed\n"
+# define ERR_CMDPATH "Error: command not found\n"
+# define ERR_EXECVE "Error: execve failed\n"
 
 // functions
-
-// main.c
 
 // error.c
 int		msg_stderr(char *err);

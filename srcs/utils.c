@@ -6,16 +6,16 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:01:39 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/04 13:04:35 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/04 13:09:41 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
 // free double pointer
-char **free_dbl_ptr(char **ptr)
+char	**free_dbl_ptr(char **ptr)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (ptr[i])
@@ -28,7 +28,7 @@ char **free_dbl_ptr(char **ptr)
 }
 
 // get all paths from envp and split by ':'
-static char **get_env_paths(char **envp)
+static char	**get_env_paths(char **envp)
 {
 	int		i;
 	char	**path;
@@ -45,16 +45,16 @@ static char **get_env_paths(char **envp)
 }
 
 // split cmd by ' '
-char **split_cmd(char *cmd)
+char	**split_cmd(char *cmd)
 {
-	char **cmd_split;
+	char	**cmd_split;
 
 	cmd_split = ft_split(cmd, ' ');
 	return (cmd_split);
 }
 
 // get command path
-char *get_cmd_path(char *cmd, char **envp)
+char	*get_cmd_path(char *cmd, char **envp)
 {
 	char	*path_tmp;
 	char	**env_paths;
