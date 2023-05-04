@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 13:01:47 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/04 13:01:47 by mpotthar         ###   ########.fr       */
+/*   Created: 2023/05/04 13:00:49 by mpotthar          #+#    #+#             */
+/*   Updated: 2023/05/04 13:02:46 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-// ******** MAIN ******** 
-int	main(int argc, char **argv, char **envp)
+// ******** EXECUTER ********
+void	executer(char *command, char **envp)
 {
-	int		p_fd[2];
-	pid_t	pid;
+	char	*cmd_path;
+	char	**cmd_split;
 
-	if (argc != 5)
-		return (msg_stderr(ERR_ARGC));
-	if (pipe(p_fd) == -1)
-		return (msg_stderr(ERR_Pipe));
-	pid = fork();
-	if (pid == -1)
-		return (msg_stderr(ERR_Fork));
-	if (pid == 0)
-		child(argv, p_fd, envp);
-	parent(argv, p_fd, envp);
+	cmd_path = get_cmd_path(command, envp);
+	if (!cmd_path)
+		msg_error(ERR_CmdPath);
+	cmd_split = split_cmd(command);
+	execve(cmd_path, cmd_split, envp);
+	msg_error(ERR_Execve);
 }

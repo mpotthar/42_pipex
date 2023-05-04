@@ -26,22 +26,6 @@
 # define ERR_CmdPath "Error: command not found\n"
 # define ERR_Execve "Error: execve failed\n"
 
-// typedef struct s_data 
-// {
-// 	int		argc;
-// 	char	**argv;
-// 	char	**envp;
-// 	char	**env_paths;
-// 	char	**cmd_split;
-// 	char	*cmd_path;
-
-// 	pid_t	pid1;
-// 	pid_t	pid2;
-// 	int		tube[2];
-// 	int		fd_in;
-// 	int		fd_out;
-// }	t_data;
-
 // functions
 
 // main.c
@@ -49,5 +33,17 @@
 // error.c
 int		msg_stderr(char *err);
 void	msg_error(char *err);
+
+// processes.c
+void	child(char **argv, int *p_fd, char **envp);
+void	parent(char **argv, int *p_fd, char **envp);
+
+// executer.c
+void	executer(char *command, char **envp);
+
+// utils.c
+char	**free_dbl_ptr(char **ptr);
+char	**split_cmd(char *cmd);
+char	*get_cmd_path(char *cmd, char **envp);
 
 #endif
