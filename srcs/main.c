@@ -79,7 +79,7 @@ int path_cmd(t_data *pipex, char *cmd)
 
 
 
-// ******** MAIN ********
+// ******** MAIN ******** 
 int	main(int argc, char **argv, char **envp)
 {
 	t_data *pipex;
