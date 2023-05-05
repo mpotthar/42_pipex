@@ -6,13 +6,13 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:01:47 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/05 11:10:28 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/05 11:13:12 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-// ******** MAIN ******** 
+// ******** MAIN ********
 int	main(int argc, char **argv, char **envp)
 {
 	int		p_fd[2];
