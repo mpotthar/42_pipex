@@ -7,6 +7,7 @@ SRCDIR			= srcs
 SRCS			= ${addprefix ${SRCDIR}/, main.c \
 					error.c \
 					utils.c \
+					utils_split.c \
 					executer.c \
 					processes.c}
 

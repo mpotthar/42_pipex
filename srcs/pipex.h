@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:08:05 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/05 10:34:44 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/05 16:46:41 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ void	executer(char *command, char **envp);
 
 // utils.c
 char	**free_dbl_ptr(char **ptr);
-char	**split_cmd(char *cmd);
 char	*get_cmd_path(char *cmd, char **envp);
+
+// utils_split.c
+char	**split_cmd(char *cmd);
 
 #endif
