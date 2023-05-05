@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:01:47 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/05 11:00:22 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/05 11:09:17 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv, char **envp)
 	int		status;
 	int		exit_status;
 
-	exit_status = 0;
+	exit_status = 1;
 	if (argc != 5)
 		return (1);
 	if (pipe(p_fd) == -1)
