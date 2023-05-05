@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:00:17 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/05 10:18:45 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/05 13:37:35 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	child_1(char **argv, int *p_fd, char **envp)
 void	child_2(char **argv, int *p_fd, char **envp)
 {
 	int	fd;
-	int ret;
+	int	ret;
 
 	fd = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)

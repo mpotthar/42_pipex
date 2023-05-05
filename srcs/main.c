@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:01:47 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/05 12:30:38 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/05 13:37:21 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int argc, char **argv, char **envp)
 	close(p_fd[0]);
 	close(p_fd[1]);
 	waitpid(pid_1, NULL, 0);
-	if(waitpid(pid_2, &status, 0) == -1)
+	if (waitpid(pid_2, &status, 0) == -1)
 		msg_error("waitpid: ");
 	if (WIFEXITED(status))
 		exit_status = WEXITSTATUS(status);
