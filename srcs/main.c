@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:01:47 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/05 10:02:44 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/05 10:26:16 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv, char **envp)
 	int		exit_status;
 
 	if (argc != 5)
-		return (0);
+		return (1);
 	if (pipe(p_fd) == -1)
 		return (msg_stderr(ERR_PIPE));
 	pid_1 = fork();
