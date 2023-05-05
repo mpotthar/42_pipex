@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:01:39 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/05 15:57:01 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/05 16:44:04 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static char	**get_env_paths(char **envp)
 // split cmd by ' '
 char	**split_cmd(char *cmd)
 {
+	// hier verbessern für sng/dbl quotes, split ändern
 	char	**cmd_split;
 
 	cmd_split = ft_split(cmd, ' ');
