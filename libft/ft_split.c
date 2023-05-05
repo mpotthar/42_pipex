@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 09:23:17 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/01/02 12:08:02 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/05 11:32:50 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,14 @@ static int	ft_count_strings(const char *s, char c)
 	return (counter);
 }
 
-static char	**ft_split_string(char **result, const char *s, char c, int j)
+static char	**ft_split_string(char **result, const char *s, char c)
 {
-	int	i;
-	int	start;
+	unsigned int	i;
+	unsigned int	start;
+	unsigned int	j;
 
 	i = -1;
+	j = 0;
 	while (s[++i] != '\0')
 	{
 		if (s[i] != c)
@@ -48,10 +50,8 @@ static char	**ft_split_string(char **result, const char *s, char c, int j)
 			while (s[i] != c && s[i] != '\0')
 				i++;
 			result[j] = ft_substr(s, start, i - start);
-			if (result[j++] == NULL)
+			if (!result[j++])
 			{
-				while (--j >= 0)
-					free(result[j]);
 				free(result);
 				return (NULL);
 			}
