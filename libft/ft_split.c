@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 09:23:17 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/05 11:32:50 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/05 11:34:01 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	**ft_split(const char *s, char c)
 	result = (char **)malloc ((ft_count_strings(s, c) + 1) * sizeof(char *));
 	if (!result)
 		return (NULL);
-	if (ft_split_string(result, s, c, 0) == NULL)
+	if (ft_split_string(result, s, c) == NULL)
 		return (NULL);
 	return (result);
 }
