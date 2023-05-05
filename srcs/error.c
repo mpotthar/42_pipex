@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:07:19 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/04 14:49:28 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/05 09:49:21 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@ int	msg_stderr(char *err)
 void	msg_error(char *err)
 {
 	perror(err);
-	exit (1);
+	exit (EXIT_FAILURE);
 }

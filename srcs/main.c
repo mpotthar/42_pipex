@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:01:47 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/04 15:01:32 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/05 10:02:44 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	main(int argc, char **argv, char **envp)
 	int		p_fd[2];
 	pid_t	pid_1;
 	pid_t	pid_2;
+	int		status;
+	int		exit_status;
 
 	if (argc != 5)
 		return (0);
@@ -36,5 +38,9 @@ int	main(int argc, char **argv, char **envp)
 	close(p_fd[0]);
 	close(p_fd[1]);
 	waitpid(pid_1, NULL, 0);
-	waitpid(pid_2, NULL, 0);
+	if(waitpid(pid_2, &status, 0) == -1)
+		msg_error("waitpid: ");
+	if (WIFEXITED(status))
+		exit_status = WEXITSTATUS(status);
+	exit(exit_status);
 }

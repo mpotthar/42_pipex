@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:00:49 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/04 14:59:11 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/05 09:59:11 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	executer(char *command, char **envp)
 	if (!cmd_path)
 	{
 		msg_error(ERR_CMDPATH);
-		exit(1);
+		exit(127);
 	}
 	cmd_split = split_cmd(command);
 	if (execve(cmd_path, cmd_split, envp) == -1)
