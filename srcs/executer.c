@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:00:49 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/05 09:59:11 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/05 10:42:05 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void	executer(char *command, char **envp)
 	cmd_path = get_cmd_path(command, envp);
 	if (!cmd_path)
 	{
-		msg_error(ERR_CMDPATH);
+		write(STDERR_FILENO, "pipex: ", 7);
+		ft_putstr_fd(command, STDERR_FILENO);
+		ft_putstr_fd(": command not found\n", STDERR_FILENO);
 		exit(127);
 	}
 	cmd_split = split_cmd(command);
