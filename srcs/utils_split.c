@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:46:18 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/08 10:41:46 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/08 10:52:27 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ static void	ft_locate_substr(char *s, size_t *start, size_t *len)
 		ft_search_for_char(s, len, ' ');
 }
 
+// checks the syntax of quotes in a given string by counting the number of 
+// single and double quotes.
+// error if the counts are not even.
 static void	check_quotes_syntax(char *cmd)
 {
 	int		dbl_qte;
@@ -91,6 +94,8 @@ static void	check_quotes_syntax(char *cmd)
 		msg_error("Invalid syntax");
 }
 
+//splits a command string into sub-strings, separated by spaces, accounting 
+// for quoted sections, returning an array of dynamically allocated strings
 char	**split_cmd(char *cmd)
 {
 	char	**substr;
