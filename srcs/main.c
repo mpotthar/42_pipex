@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:01:47 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/09 11:56:14 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/09 12:04:50 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	close_pipe(int p_fd[2])
 	close(p_fd[1]);
 }
 
-static int	waiting(int p_fd[2], pid_t pid_1, pid_t pid_2)
+static int	wait_pids(int p_fd[2], pid_t pid_1, pid_t pid_2)
 {
 	int		status;
 	int		exit_status;
@@ -68,7 +68,7 @@ int	main(int argc, char **argv, char **envp)
 		return (msg_stderr(ERR_FORK));
 	if (pid_2 == 0)
 		child_2(argv, p_fd, envp, fd[1]);
-	exit_status = waiting(p_fd, pid_1, pid_2);
+	exit_status = wait_pids(p_fd, pid_1, pid_2);
 	close(fd[1]);
 	exit(exit_status);
 }
