@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:01:39 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/05 16:46:15 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:05:30 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char	**free_dbl_ptr(char **ptr)
 	int	i;
 
 	i = 0;
+	//chekc if ptr is not NULL if you cant gurantee that
 	while (ptr[i])
 	{
 		free(ptr[i]);
@@ -34,6 +35,7 @@ static char	**get_env_paths(char **envp)
 	char	**path;
 
 	i = 0;
+	///?????
 	if (*envp == NULL)
 		return (ft_split("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/ \
 				local/munki:/opt/X11/bin:/Library/Apple/usr/bin", ':'));
@@ -44,6 +46,7 @@ static char	**get_env_paths(char **envp)
 		i++;
 	}
 	path = ft_split(envp[i] + 5, ':');
+	// error?
 	return (path);
 }
 
@@ -79,6 +82,7 @@ char	*get_cmd_path(char *cmd, char **envp)
 	cmd_split = split_cmd(cmd);
 	while (env_paths[i])
 	{
+		//if envpaths is NULL -> Segfault
 		cmd_path = get_single_cmd_path(env_paths, cmd_split, i);
 		if (access(cmd_path, X_OK) == 0)
 			return (cmd_path);

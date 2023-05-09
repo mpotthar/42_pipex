@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:01:47 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/09 14:25:24 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:27:34 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ int	main(int argc, char **argv, char **envp)
 	open_fds(fd, argv);
 	if (pipe(p_fd) == -1)
 		return (msg_stderr(ERR_PIPE));
+	//close fd ?????
 	pid_1 = fork();
+	//close - fd ?????
 	if (pid_1 == -1)
 		return (msg_stderr(ERR_FORK));
 	if (pid_1 == 0)

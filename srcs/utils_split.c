@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:46:18 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/08 11:36:20 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:53:17 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,3 +111,10 @@ char	**split_cmd(char *cmd)
 	substr[sub_cmds] = NULL;
 	return (substr);
 }
+
+
+// Problem ist:
+// echo'a' 'b' -> echoa b
+// echo ''
+// echo 'a'   'b' -> echo a b -> output: "a b"
+// für jedes space extra string
