@@ -11,51 +11,36 @@ SRCS			= ${addprefix ${SRCDIR}/, main.c \
 					executer.c \
 					processes.c}
 
-OBJS			= ${SRCS:.c=.o}
-
 CC				= cc
 
 CFLAGS			= -Wall -Wextra -Werror
 
-RM				= rm -f
+OBJS			= ${SRCS:.c=.o}
 
-# Colors
-GREEN			= \033[92m
-YELLOW			= \033[0;33m
-MAGENTA			= \033[0;35m
-ESCAPE			= \033[0m
+HEADER			= srcs/pipex.h
+
+RM				= rm -f
 
 all:			lib ${NAME}
 
-%.o: %.c		
-				@${CC} ${CFLAGS} -c $^ -o $@
+${NAME}:		${OBJS} ${LIBFT}/libft.a
+				${CC} ${CFLAGS} ${OBJS} -L ${LIBFT} -lft -o ${NAME}
 
-${NAME}:		start ${OBJS} ${LIBFT}/libft.a
-				@${CC} ${CFLAGS} ${OBJS} -L ${LIBFT} -lft -o ${NAME}
-				@echo "${GREEN}******************   COMPILED  ******************${ESCAPE}"
-				@echo "${MAGENTA}******************     DONE    ******************${ESCAPE}"
-				@echo " "
+${OBJS}:		${HEADER}
 
 lib:
-				@make bonus -C ${LIBFT} > /dev/null 2>&1	
-
-start:			
-				@echo " "
-				@echo "-------------------------------------------------"
-				@echo "${MAGENTA}******************    PIPEX    ******************${ESCAPE}"
-				@echo "-------------------------------------------------"
-				@echo " "
-				@echo "${YELLOW}******************  COMPILING  ******************${ESCAPE}"
+				make -C ${LIBFT} 
 
 clean:	
-				@${RM} ${OBJS}
-				@make clean -C ${LIBFT} > /dev/null 2>&1
-				@echo "${GREEN}*******************  CLEANED  *******************${ESCAPE}"
+				${RM} ${OBJS}
+				make clean -C ${LIBFT}
 
 fclean:			clean
-				@${RM} ${NAME}
-				@make fclean -C ${LIBFT} > /dev/null 2>&1
+				${RM} ${NAME}
+				make fclean -C ${LIBFT}
 
 re:				fclean all
 
-.PHONY:			all start clean fclean re
+.PHONY:			all clean fclean re lib
+
+.NOTPARALLEL:
