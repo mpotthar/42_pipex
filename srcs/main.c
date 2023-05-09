@@ -6,18 +6,20 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:01:47 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/09 12:04:50 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/09 12:10:57 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+// close pipe file descriptors
 static void	close_pipe(int p_fd[2])
 {
 	close(p_fd[0]);
 	close(p_fd[1]);
 }
 
+// wait for child processes to finish, then return exit status
 static int	wait_pids(int p_fd[2], pid_t pid_1, pid_t pid_2)
 {
 	int		status;
@@ -33,6 +35,7 @@ static int	wait_pids(int p_fd[2], pid_t pid_1, pid_t pid_2)
 	return (exit_status);
 }
 
+// open file descriptors for infile and outfile
 static void	open_fds(int *fd, char **argv)
 {
 	fd[1] = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
