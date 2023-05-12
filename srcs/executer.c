@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:00:49 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/12 13:22:01 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/12 16:56:41 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,30 +27,14 @@ void	executer(char *command, char **envp)
 		write(STDERR_FILENO, "pipex: ", 7);
 		ft_putstr_fd(command, STDERR_FILENO);
 		ft_putstr_fd(": command not found\n", STDERR_FILENO);
+		if (cmd_split)
+			free_dbl_ptr(cmd_split);
 		exit(127);
 	}
-	//error
-	//free path
 	if (execve(cmd_path, cmd_split, envp) == -1)
+	{
+		free(cmd_path);
+		free_dbl_ptr(cmd_split);
 		msg_error(ERR_EXECVE);
+	}
 }
-
-// void	executer(char *command, char **envp)
-// {
-// 	char	*cmd_path;
-// 	char	**cmd_split;
-
-// 	cmd_path = get_cmd_path(command, envp);
-// 	if (!cmd_path)
-// 	{
-// 		write(STDERR_FILENO, "pipex: ", 7);
-// 		ft_putstr_fd(command, STDERR_FILENO);
-// 		ft_putstr_fd(": command not found\n", STDERR_FILENO);
-// 		exit(127);
-// 	}
-// 	cmd_split = split_cmd(command);
-// 	//error
-// 	//free path
-// 	if (execve(cmd_path, cmd_split, envp) == -1)
-// 		msg_error(ERR_EXECVE);
-// }

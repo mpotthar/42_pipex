@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:08:05 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/12 16:26:19 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:47:11 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,12 @@
 // error.c
 int		msg_stderr(char *err);
 void	msg_error(char *err);
+bool	ft_error_ret_true(char *err);
+int		msg_fork_error(int *fd, int *p_fd);
 
 // processes.c
 void	child_1(char **argv, int *p_fd, char **envp, int *fd);
-void	child_2(char **argv, int *p_fd, char **envp, int fd);
+void	child_2(char **argv, int *p_fd, char **envp, int *fd);
 
 // executer.c
 void	executer(char *command, char **envp);
@@ -57,15 +59,12 @@ void	executer(char *command, char **envp);
 char	**free_dbl_ptr(char **ptr);
 char	*get_cmd_path(char *cmd, char **envp);
 
-// utils_split.c
-char	**split_cmd(char *cmd);
-
 //NEUE FUNKTIONEN
 
 int		ft_count_cmd_line_elements(char *cmd_line, char c);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
-int	ft_skip_quote_block(char *cmd_line, int *i, bool *split);
-int ft_skip_to_next_delimiter(char *cmd_line, int *i, bool *split, char c);
+int		ft_skip_quote_block(char *cmd_line, int *i, bool *split);
+int		ft_skip_to_next_delimiter(char *cmd_line, int *i, bool *split, char c);
 bool	ft_check_equal_quote_amt(char *s);
 
 char	**ft_free_double_pointer(char **str);

@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:01:39 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/12 13:25:05 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:00:48 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ char	**free_dbl_ptr(char **ptr)
 	int	i;
 
 	i = 0;
-	//chekc if ptr is not NULL if you cant gurantee that
+	if (!ptr)
+		return (NULL);
 	while (ptr[i])
 	{
 		free(ptr[i]);
@@ -46,7 +47,8 @@ static char	**get_env_paths(char **envp)
 		i++;
 	}
 	path = ft_split(envp[i] + 5, ':');
-	// error?
+	if (!path)
+		perror("split path error");
 	return (path);
 }
 
@@ -82,7 +84,6 @@ char	*get_cmd_path(char *cmd, char **envp)
 		return (NULL);
 	while (env_paths[i])
 	{
-		//if envpaths is NULL -> Segfault
 		cmd_path = get_single_cmd_path(env_paths, cmd, i);
 		if (access(cmd_path, X_OK) == 0)
 			break ;
@@ -96,31 +97,3 @@ char	*get_cmd_path(char *cmd, char **envp)
 	free_dbl_ptr(env_paths);
 	return (cmd_path);
 }
-
-// // get command path
-// char	*get_cmd_path(char *cmd, char **envp)
-// {
-// 	char	**env_paths;
-// 	char	**cmd_split;
-// 	char	*cmd_path;
-// 	int		i;
-
-// 	i = 0;
-// 	env_paths = get_env_paths(envp);
-// 	cmd_split = split_cmd(cmd);
-// 	while (env_paths[i])
-// 	{
-// 		//if envpaths is NULL -> Segfault
-// 		cmd_path = get_single_cmd_path(env_paths, cmd_split, i);
-// 		if (access(cmd_path, X_OK) == 0)
-// 			return (cmd_path);
-// 		else
-// 		{
-// 			free(cmd_path);
-// 			cmd_path = NULL;
-// 		}
-// 		i++;
-// 	}
-// 	free_dbl_ptr(env_paths);
-// 	return (NULL);
-// }

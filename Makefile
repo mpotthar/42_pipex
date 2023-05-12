@@ -7,7 +7,6 @@ SRCDIR			= srcs
 SRCS			= ${addprefix ${SRCDIR}/, main.c \
 					error.c \
 					utils.c \
-					utils_split.c \
 					executer.c \
 					processes.c \
 					count_elements.c \
@@ -16,7 +15,7 @@ SRCS			= ${addprefix ${SRCDIR}/, main.c \
 
 CC				= cc
 
-CFLAGS			= -Wall -Wextra -Werror
+# CFLAGS			= -Wall -Wextra -Werror
 
 OBJS			= ${SRCS:.c=.o}
 
