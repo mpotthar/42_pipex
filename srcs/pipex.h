@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:08:05 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/09 11:52:01 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/12 13:24:33 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <string.h>
 # include <sys/wait.h>
 # include <stdlib.h>
+# include <stdbool.h>
 
 // colors
 # define RED "\033[0;31m"
@@ -57,5 +58,22 @@ char	*get_cmd_path(char *cmd, char **envp);
 
 // utils_split.c
 char	**split_cmd(char *cmd);
+
+//NEUE FUNKTIONEN
+
+int		ft_count_cmd_line_elements(char *cmd_line, char c);
+char	*ft_substr(const char *s, unsigned int start, size_t len);
+int	ft_skip_quote_block(char *cmd_line, int *i, bool *split);
+int ft_skip_to_next_delimiter(char *cmd_line, int *i, bool *split, char c);
+bool	ft_check_equal_quote_amt(char *s);
+
+char	**ft_free_double_pointer(char **str);
+
+char	**ft_get_cmd_line_elements(char *cmd_line);
+
+void	ft_print_double_pointer(char **str);
+char	**ft_free_double_pointer(char **str);
+
+char	**ft_remove_quotes_from_elements(char **splitted_cmd_line);
 
 #endif

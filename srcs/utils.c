@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:01:39 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/09 15:05:30 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/12 13:25:05 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static char	**get_env_paths(char **envp)
 }
 
 // build single cmd path (env path + '/' + exec)
-char	*get_single_cmd_path(char **env_paths, char **cmd_split, int i)
+char	*get_single_cmd_path(char **env_paths, char *cmd, int i)
 {
 	char	*path_tmp;
 	char	*cmd_path;
@@ -59,7 +59,7 @@ char	*get_single_cmd_path(char **env_paths, char **cmd_split, int i)
 	path_tmp = ft_strjoin(env_paths[i], "/");
 	if (!path_tmp)
 		return (NULL);
-	cmd_path = ft_strjoin(path_tmp, cmd_split[0]);
+	cmd_path = ft_strjoin(path_tmp, cmd);
 	if (!cmd_path)
 	{
 		free(path_tmp);
@@ -73,19 +73,19 @@ char	*get_single_cmd_path(char **env_paths, char **cmd_split, int i)
 char	*get_cmd_path(char *cmd, char **envp)
 {
 	char	**env_paths;
-	char	**cmd_split;
 	char	*cmd_path;
 	int		i;
 
 	i = 0;
 	env_paths = get_env_paths(envp);
-	cmd_split = split_cmd(cmd);
+	if (!env_paths)
+		return (NULL);
 	while (env_paths[i])
 	{
 		//if envpaths is NULL -> Segfault
-		cmd_path = get_single_cmd_path(env_paths, cmd_split, i);
+		cmd_path = get_single_cmd_path(env_paths, cmd, i);
 		if (access(cmd_path, X_OK) == 0)
-			return (cmd_path);
+			break ;
 		else
 		{
 			free(cmd_path);
@@ -94,13 +94,12 @@ char	*get_cmd_path(char *cmd, char **envp)
 		i++;
 	}
 	free_dbl_ptr(env_paths);
-	return (NULL);
+	return (cmd_path);
 }
 
 // // get command path
 // char	*get_cmd_path(char *cmd, char **envp)
 // {
-// 	char	*path_tmp;
 // 	char	**env_paths;
 // 	char	**cmd_split;
 // 	char	*cmd_path;
@@ -111,16 +110,8 @@ char	*get_cmd_path(char *cmd, char **envp)
 // 	cmd_split = split_cmd(cmd);
 // 	while (env_paths[i])
 // 	{
-// 		path_tmp = ft_strjoin(env_paths[i], "/");
-// 		if (!path_tmp)
-// 			return (NULL);
-// 		cmd_path = ft_strjoin(path_tmp, cmd_split[0]);
-// 		if (!cmd_path)
-// 		{
-// 			free(path_tmp);
-// 			return (NULL);
-// 		}
-// 		free(path_tmp);
+// 		//if envpaths is NULL -> Segfault
+// 		cmd_path = get_single_cmd_path(env_paths, cmd_split, i);
 // 		if (access(cmd_path, X_OK) == 0)
 // 			return (cmd_path);
 // 		else

@@ -9,7 +9,10 @@ SRCS			= ${addprefix ${SRCDIR}/, main.c \
 					utils.c \
 					utils_split.c \
 					executer.c \
-					processes.c}
+					processes.c \
+					count_elements.c \
+					ft_get_cmd_line_elements.c \
+					remove_quotes.c}
 
 CC				= cc
 
