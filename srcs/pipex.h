@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:08:05 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/12 13:24:33 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/12 16:26:19 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define ERR_FORK "Error: fork failed\n"
 # define ERR_CMDPATH "Error: command not found\n"
 # define ERR_EXECVE "Error: execve failed\n"
+# define ERR_DUP2 "Error: dup2 failed\n"
 
 // functions
 

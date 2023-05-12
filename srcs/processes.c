@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:00:17 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/09 14:58:22 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/12 16:28:34 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	child_1(char **argv, int *p_fd, char **envp, int *fd)
 	close(fd[1]);
 	if (fd[0] < 0)
 		exit(1);
-	dup2(fd[0], STDIN_FILENO);
-	//error???
+	if (dup2(fd[0], STDIN_FILENO) == -1)
+		msg_error(ERR_DUP2);
 	close(fd[0]);
-	dup2(p_fd[1], STDOUT_FILENO);
-	//error???
+	if (dup2(p_fd[1], STDOUT_FILENO) == -1);
+		msg_error(ERR_DUP2);
 	close(p_fd[0]);
 	close(p_fd[1]);
 	executer(argv[2], envp);
