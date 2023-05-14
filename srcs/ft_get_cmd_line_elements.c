@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 23:36:30 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/12 16:06:44 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/14 16:14:09 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,6 @@ static char	**ft_split_cmd_line(char *cmd_line, char c,
 			split = true;
 			i_j[0]++;
 		}
-		// if (cmd_line[i_j[0]] && cmd_line[i_j[0]] != '\''
-		// 	&& cmd_line[i_j[0]] != '\"')
-		// 	i_j[0]++;
 	}
 	return (splitted_cmd_line);
 }
@@ -84,7 +81,7 @@ char	**ft_get_cmd_line_elements(char *cmd_line)
 		return (NULL);
 	}
 	splitted_cmd_line = ft_split_cmd_line(cmd_line, ' ', splitted_cmd_line);
-	if(splitted_cmd_line)
+	if (splitted_cmd_line)
 		splitted_cmd_line = ft_remove_quotes_from_elements(splitted_cmd_line);
 	return (splitted_cmd_line);
 }

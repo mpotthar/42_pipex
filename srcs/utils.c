@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:01:39 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/12 17:00:48 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/14 16:13:21 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static char	**get_env_paths(char **envp)
 	char	**path;
 
 	i = 0;
-	///?????
 	if (*envp == NULL)
 		return (ft_split("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/ \
 				local/munki:/opt/X11/bin:/Library/Apple/usr/bin", ':'));
