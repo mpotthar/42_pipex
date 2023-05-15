@@ -59,3 +59,4 @@ pipex
 pipex.dSYM
 in
 out
+Dockerfile
