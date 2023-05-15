@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:01:47 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/12 17:47:35 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/15 11:45:14 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,18 @@
 // close pipe file descriptors
 static void	close_pipe(int p_fd[2])
 {
-	close(p_fd[0]);
-	close(p_fd[1]);
+	if (p_fd[0] != -1)
+		close(p_fd[0]);
+	if (p_fd[1] != -1)
+		close(p_fd[1]);
 }
 
 static void	close_fds(int *fd)
 {
-	close(fd[0]);
-	close(fd[1]);
+	if (fd[0] != -1)
+		close(fd[0]);
+	if (fd[1] != -1)
+		close(fd[1]);
 }
 
 // wait for child processes to finish, then return exit status
