@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:08:05 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/16 10:08:26 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/16 10:11:06 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@
 # define ESC "\033[0m"
 
 // error
-# define ERR_ARGC "Error: wrong number of arguments\n"
+# define ERR_ARGC "pipex: wrong number of arguments\n"
 # define ERR_INFILE "pipex: input"
 # define ERR_OUTFILE "pipex: output"
-# define ERR_PIPE "Error: pipe failed\n"
-# define ERR_FORK "Error: fork failed\n"
-# define ERR_CMDPATH "Error: command not found\n"
-# define ERR_EXECVE "Error: execve failed\n"
-# define ERR_DUP2 "Error: dup2 failed\n"
+# define ERR_PIPE "pipex: pipe failed\n"
+# define ERR_FORK "pipex: fork failed\n"
+# define ERR_CMDPATH "pipex: command not found\n"
+# define ERR_EXECVE "pipex: execve failed\n"
+# define ERR_DUP2 "pipex: dup2 failed\n"
 
 // functions
 
