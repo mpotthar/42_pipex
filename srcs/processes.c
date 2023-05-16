@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:00:17 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/15 11:51:23 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/15 12:36:45 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	child_1(char **argv, int *p_fd, char **envp, int *fd)
 	bool	error;
 
 	error = false;
-	close(fd[1]);
+	if (fd[1] != -1)
+		close(fd[1]);
 	if (fd[0] < 0)
 	{
 		close_all_fds(fd, p_fd);
@@ -39,7 +40,8 @@ void	child_1(char **argv, int *p_fd, char **envp, int *fd)
 	}
 	if (dup2(fd[0], STDIN_FILENO) == -1)
 		error = ft_error_ret_true(ERR_DUP2);
-	close(fd[0]);
+	if (fd[0] != -1)
+		close(fd[0]);
 	if (error == false && dup2(p_fd[1], STDOUT_FILENO) == -1)
 		error = ft_error_ret_true(ERR_DUP2);
 	close(p_fd[0]);
@@ -55,7 +57,8 @@ void	child_2(char **argv, int *p_fd, char **envp, int *fd)
 	bool	error;
 
 	error = false;
-	close(fd[0]);
+	if (fd[0] != -1)
+		close(fd[0]);
 	if (fd[1] < 0)
 	{
 		close_all_fds(fd, p_fd);
@@ -63,7 +66,8 @@ void	child_2(char **argv, int *p_fd, char **envp, int *fd)
 	}
 	if (dup2(fd[1], STDOUT_FILENO) == -1)
 		error = ft_error_ret_true(ERR_DUP2);
-	close(fd[1]);
+	if (fd[1] != -1)
+		close(fd[1]);
 	if (dup2(p_fd[0], STDIN_FILENO) == -1)
 		error = ft_error_ret_true(ERR_DUP2);
 	close(p_fd[0]);

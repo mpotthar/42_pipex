@@ -6,7 +6,7 @@
 /*   By: mpotthar <mpotthar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:08:05 by mpotthar          #+#    #+#             */
-/*   Updated: 2023/05/12 17:47:11 by mpotthar         ###   ########.fr       */
+/*   Updated: 2023/05/16 10:08:26 by mpotthar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,16 @@ void	executer(char *command, char **envp);
 char	**free_dbl_ptr(char **ptr);
 char	*get_cmd_path(char *cmd, char **envp);
 
-//NEUE FUNKTIONEN
-
-int		ft_count_cmd_line_elements(char *cmd_line, char c);
-char	*ft_substr(const char *s, unsigned int start, size_t len);
+// count_elements.c
+bool	ft_check_equal_quote_amt(char *s);
 int		ft_skip_quote_block(char *cmd_line, int *i, bool *split);
 int		ft_skip_to_next_delimiter(char *cmd_line, int *i, bool *split, char c);
-bool	ft_check_equal_quote_amt(char *s);
+int		ft_count_cmd_line_elements(char *cmd_line, char c);
 
-char	**ft_free_double_pointer(char **str);
-
+// ft_get_cmd_line_elements.c
 char	**ft_get_cmd_line_elements(char *cmd_line);
 
-void	ft_print_double_pointer(char **str);
-char	**ft_free_double_pointer(char **str);
-
+// remove_quotes.c
 char	**ft_remove_quotes_from_elements(char **splitted_cmd_line);
 
 #endif

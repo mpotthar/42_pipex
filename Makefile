@@ -15,7 +15,7 @@ SRCS			= ${addprefix ${SRCDIR}/, main.c \
 
 CC				= cc
 
-# CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror
 
 OBJS			= ${SRCS:.c=.o}
 
